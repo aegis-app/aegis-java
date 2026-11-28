@@ -1,0 +1,23 @@
+# ===== Build output =====
+out/
+aegis.jar
+*.class
+
+# ===== Runtime data =====
+data/*
+!data/.gitkeep
+!data/stations.tsv
+
+# ===== Local config (contains secrets such as webhook URLs and the A2S token) =====
+config.json
+
+# ===== OS / Editor =====
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# ===== Env / Logs =====
+.env
+*.log
