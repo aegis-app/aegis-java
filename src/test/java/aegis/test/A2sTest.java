@@ -505,7 +505,10 @@ public final class A2sTest {
         check(OpenMeteo.wxIcon(0, 0, 12).equals("☀"), "wxIcon day sun");
         check(OpenMeteo.MODELS.equals("jma_seamless,ecmwf_ifs025"), "meteo models fixed order");
         // 🧪 時間別テーブル: 3時間区間の集約と区間最大
-        LocalDateTime base = LocalDateTime.now().withMinute(0).withSecond(0).withNano(0).plusHours(1);
+        // 🕐 基準時刻は3時間区間の境界（15時）に固定する。now() 基準で組み立てると
+        // 開始時刻の3での剰余によってブロック数が変わり、実行時刻で成否が変わる
+        // （時刻依存テストの固定時刻化。DESIGN.md 判断記録参照）
+        LocalDateTime base = LocalDateTime.of(2026, 11, 28, 15, 0);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         StringBuilder times = new StringBuilder(), temps = new StringBuilder(), codes = new StringBuilder(),
             pops = new StringBuilder(), precips = new StringBuilder();
